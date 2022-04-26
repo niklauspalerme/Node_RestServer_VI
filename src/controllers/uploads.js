@@ -2,7 +2,7 @@
 // Importaciones
 
 const path = require('path');
-
+const { v4: uuidv4 } = require('uuid');
 
 
 /////////////////////////////////////////////////////////////
@@ -42,7 +42,8 @@ const cargarArchivo = (req,res) =>{
 
 
     // #5 - Usamos la funcionm mv para mover el archivo a la ruta definida
-    const uploadPath =  path.join( __dirname, '../uploads/',archivo.name);
+    const nonbreTemp = uuidv4() + '.' + extension;
+    const uploadPath =  path.join( __dirname, '../uploads/', nonbreTemp);
     archivo.mv(uploadPath, err =>  {
         if (err){
             console.log(err);
