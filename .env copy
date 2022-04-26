@@ -1,0 +1,6 @@
+PORT=3030
+MONGODB_CNN=mongodb+srv://nicoroot:12345@cluster0.anjd2.mongodb.net/cafeDB
+MONGODB_LOCAL=mongodb://localhost:27017/cafeDB
+SECRETKEY=EstoEsMiPublicKey12345
+GOOGLE_CLIENT_ID=622282018820-0714l7jb21j45n86c5ielst3pjol60n7.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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

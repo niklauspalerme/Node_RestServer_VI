@@ -1,0 +1,31 @@
+/////////////////////////////////////////////////////////////
+// Importaciones
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// Funciones del Controlador
+
+
+const cargarArchivo = (req,res) =>{
+    
+    console.log('POST /api/uploads');
+
+    res.json({
+        msg: "Hola"
+    })
+}
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// Exportaciones
+
+module.exports = {
+    cargarArchivo
+}
