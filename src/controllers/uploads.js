@@ -27,11 +27,22 @@ const cargarArchivo = (req,res) =>{
         });
     }
 
-    //#3 - Definimos la ruta a mover
+    //#3 - Organizamos el nombre del archivo y su extensión
     const {archivo} = req.files;
-    const uploadPath =  path.join( __dirname, '../uploads/',archivo.name);
+    const nombreCortado = archivo.name.split('.')
+    const extension = nombreCortado[nombreCortado.length -1]
 
-    // #4 - Usamos la funcionm mv para mover el archivo a la ruta definida
+
+    //#4 -Validamos extensiones
+    const extencionesValidas = ['png','jpg', 'jpeg', 'gif'];
+    if (extencionesValidas.includes(extension))
+        return res.status(400).json({
+            msg: 'The extesntion of the file is not valid'
+        });
+
+
+    // #5 - Usamos la funcionm mv para mover el archivo a la ruta definida
+    const uploadPath =  path.join( __dirname, '../uploads/',archivo.name);
     archivo.mv(uploadPath, err =>  {
         if (err){
             console.log(err);
