@@ -20,6 +20,8 @@ const esRoleValido = async(rol = '') => {
     if (!exisRol) {
         throw new Error(`The rol ${rol}, it doesnt exist on the DB`);
     }
+
+    return true;
 }
 
 
@@ -31,6 +33,8 @@ const validarEmailRepetido = async(correo = '') => {
     if (existEmail) {
         throw new Error("The email exist. Please try with another one");
     }
+
+    return true;
 }
 
 
@@ -41,6 +45,8 @@ const existeUsuarioPorID = async (id) => {
     if (!existID) {
         throw new Error("The id doesn't exist. Please try with another one");
     }
+
+    return true;
 
 }
 
@@ -54,6 +60,7 @@ const existeCategoria = async (id) =>{
         throw new Error("The id doesn't exist. Please try with another one");
     }
 
+    return true;
 
 }
 
@@ -68,6 +75,17 @@ const existeProducto = async (id) =>{
         throw new Error ('The id doesnt exist. Please try with another one.');
 
 
+    return true;
+}
+
+
+//6
+const  coleccionesPermitidas = (coleccion= '', colecciones = []) =>{
+
+    if (!colecciones.includes(coleccion))
+        throw new Error ('The coleccion is not allowed');
+
+    return true;
 }
 
 
@@ -82,5 +100,6 @@ module.exports = {
     validarEmailRepetido,
     existeUsuarioPorID,
     existeCategoria,
-    existeProducto
+    existeProducto,
+    coleccionesPermitidas
 }

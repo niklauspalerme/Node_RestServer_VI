@@ -1,6 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Importaciones
 
+const res = require("express/lib/response");
 const { subirArchivo } = require("../helpers");
 
 
@@ -9,7 +10,7 @@ const { subirArchivo } = require("../helpers");
 /////////////////////////////////////////////////////////////
 // Funciones del Controlador
 
-
+//1
 const cargarArchivo = async (req,res) =>{
     
     console.log('POST /api/uploads');
@@ -50,10 +51,22 @@ const cargarArchivo = async (req,res) =>{
 }
 
 
+const actualizarImagen = async  (req,res)=>{
+
+    console.log('PUT /api/uploads/:coleccion/:id');
+
+    const {id,coleccion}= req.params
+
+    res.json({id, coleccion})
+
+
+}
+
 
 /////////////////////////////////////////////////////////////
 // Exportaciones
 
 module.exports = {
-    cargarArchivo
+    cargarArchivo,
+    actualizarImagen
 }
