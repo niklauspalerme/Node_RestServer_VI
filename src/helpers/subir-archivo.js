@@ -19,11 +19,10 @@ const subirArchivo = (files, extensionesValidas = ['png','jpg', 'jpeg', 'gif'], 
         //Organizamos el nombre del archivo y su extensión
         const {archivo} = files;
         const nombreCortado = archivo.name.split('.')
-        const extension = nombreCortado[nombreCortado.length -1]
-
+        const extension = nombreCortado[nombreCortado.length -1].toLowerCase( )
 
         //Validamos extensiones
-        if (extensionesValidas.includes(extension))
+        if (!extensionesValidas.includes(extension) )
             return reject ('The extension of the file is not valid');
 
 

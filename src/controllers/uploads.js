@@ -28,12 +28,22 @@ const cargarArchivo = async (req,res) =>{
         });
     }
 
-    const pathArchivo = await subirArchivo(req.files)
+    try {
 
-    res.json({
-        msg: "POST /api/uploads",
-        path: pathArchivo
-    })
+        //Testing -> createParentPath
+        //const pathArchivo = await subirArchivo(req.files, ['txt', 'md'], 'texto')
+        const pathArchivo = await subirArchivo(req.files,undefined, 'imgs')
+
+        res.json({
+            msg: "POST /api/uploads",
+            path: pathArchivo
+        })
+        
+    } catch (msg) {
+
+        res.status(400).json({msg})
+        
+    }
 
 
     
