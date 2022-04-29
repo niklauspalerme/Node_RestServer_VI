@@ -1,6 +1,8 @@
 /////////////////////////////////////////////////////////////
 // Importaciones
 
+const path = require('path');
+const fs = require('fs');
 const res = require("express/lib/response");
 const { subirArchivo } = require("../helpers");
 const {Usuarios} = require('../models/usuario');
@@ -17,20 +19,6 @@ const {Productos} = require('../models/producto');
 const cargarArchivo = async (req,res) =>{
     
     console.log('POST /api/uploads');
-
-    // #1 - Verificamos que venga un file
-    if ( !req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).json({
-            msg: 'No files were uploaded.'
-        });
-    }
-
-    // #2 - Verificamos que venga files con el nombre "archivo"
-    if (!req.files.archivo ) {
-        return res.status(400).json({
-            msg: 'No files were uploaded.'
-        });
-    }
 
     try {
 
@@ -94,6 +82,17 @@ const actualizarImagen = async  (req,res)=>{
             })
             break;
     }
+
+
+   // Limpiar imágenes previas
+   if ( modelo.img ) {
+    // Hay que borrar la imagen del servidor
+    const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.img );
+    if ( fs.existsSync( pathImagen ) ) {
+        fs.unlinkSync( pathImagen );
+    }
+}
+
 
 
 

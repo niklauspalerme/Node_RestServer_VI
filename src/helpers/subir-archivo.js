@@ -27,15 +27,15 @@ const subirArchivo = (files, extensionesValidas = ['png','jpg', 'jpeg', 'gif'], 
 
 
         //Usamos la funcion mv para mover el archivo a la ruta definida
-        const nonbreTemp = uuidv4() + '.' + extension;
-        const uploadPath =  path.join( __dirname, '../uploads/',carpeta, nonbreTemp);
+        const nombreTemp = uuidv4() + '.' + extension;
+        const uploadPath =  path.join( __dirname, '../uploads/',carpeta, nombreTemp);
         archivo.mv(uploadPath, err =>  {
             if (err){
                 console.log(err);
                 return reject(err);
             }
             else
-                resolve(uploadPath);
+                resolve(nombreTemp);
         });
 
     });
