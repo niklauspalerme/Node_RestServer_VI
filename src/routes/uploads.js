@@ -4,7 +4,7 @@
 
 const { Router } = require("express");
 const { check } = require('express-validator');
-const { cargarArchivo, actualizarImagen } = require("../controllers/uploads");
+const { cargarArchivo, actualizarImagen, mostrarImagen } = require("../controllers/uploads");
 const { coleccionesPermitidas } = require("../helpers");
 const { validarArchivoUpload, validarCampos } = require("../middlewares");
 const router = Router();
@@ -24,6 +24,12 @@ router.put('/:coleccion/:id',[
     check('coleccion').custom(c => coleccionesPermitidas( c,  ['usuarios', 'productos'])),
     validarCampos],
     actualizarImagen)
+
+ router.get('/:coleccion/:id',[
+    check('id', 'The id must be Mondo ID').isMongoId(),
+    check('coleccion').custom(c => coleccionesPermitidas( c,  ['usuarios', 'productos'])),
+    validarCampos],
+    mostrarImagen)
 
 
 

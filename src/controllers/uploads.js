@@ -41,6 +41,7 @@ const cargarArchivo = async (req,res) =>{
 }
 
 
+//2
 const actualizarImagen = async  (req,res)=>{
 
     console.log('PUT /api/uploads/:coleccion/:id');
@@ -93,9 +94,7 @@ const actualizarImagen = async  (req,res)=>{
     }
 }
 
-
-
-
+    //Actualizar img
     const nombre  = await subirArchivo(req.files,undefined, coleccion)
     modelo.img = nombre;
     await modelo.save();
@@ -109,10 +108,67 @@ const actualizarImagen = async  (req,res)=>{
 }
 
 
+//3
+const mostrarImagen = async (req,res) =>{
+
+    console.log('GET /api/uploads/:coleccion/:id');
+
+    const {id, coleccion} = req.params;
+
+    let modelo;
+
+    switch (coleccion) {
+
+        case 'usuarios':
+
+            modelo = await  Usuarios.findById(id);
+
+            if (!modelo){
+                return  res.status(400).json({
+                    msg: "There is not user with this ID"
+                })
+            }
+
+            break;
+
+
+        case 'productos':
+
+            modelo = await  Productos.findById(id);
+
+            if (!modelo){
+                return  res.status(400).json({
+                    msg: "There is not product with this ID"
+                })
+            }
+
+        break;
+    
+        default:
+            res.status(500).json({
+                msg: "Internal Server Error"
+            })
+            break;
+    }
+
+
+   // Limpiar imágenes previas
+   if ( modelo.img ) {
+        // Hay que borrar la imagen del servidor
+        const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.img );
+        if ( fs.existsSync( pathImagen ) ) {
+            return res.sendFile (pathImagen)
+        }
+    }
+
+}
+
+
 /////////////////////////////////////////////////////////////
 // Exportaciones
 
 module.exports = {
     cargarArchivo,
-    actualizarImagen
+    actualizarImagen,
+    mostrarImagen
 }
