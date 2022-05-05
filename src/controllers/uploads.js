@@ -157,9 +157,17 @@ const mostrarImagen = async (req,res) =>{
         // Hay que borrar la imagen del servidor
         const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.img );
         if ( fs.existsSync( pathImagen ) ) {
+            //Retornamos la imagen
             return res.sendFile (pathImagen)
         }
     }
+
+
+
+    const pathImagen = path.join(__dirname, '../assets/no-image.jpg');
+
+    res.sendFile(pathImagen);
+
 
 }
 
